@@ -13,38 +13,19 @@ class Solution {
 public:
     void flatten(TreeNode* root) {
         
-        queue<TreeNode*>q;
+        while(root != nullptr){
 
-        preOrder(root,q);
-
-        if(!q.empty()){
-            q.pop();
-        };
-
-        while(!q.empty()){
-            root->right = q.front();
-            root->left = nullptr;
-            q.pop();
+            if(root->left != nullptr){
+                TreeNode* tmp = root->left;
+                while(tmp->right){
+                    tmp = tmp->right;
+                };
+                tmp->right = root->right;
+                root->right = root->left;
+                root->left = nullptr;
+            };
             root = root->right;
         };
 
     }
-
-    void preOrder(TreeNode* root, queue<TreeNode*>& q){
-
-        if(root == nullptr){
-            return;
-        };
-
-        q.push(root);
-
-        if(root->left != nullptr){
-            preOrder(root->left,q);
-        };
-        if(root->right != nullptr){
-            preOrder(root->right,q);
-        };
-
-    };
-
 };
