@@ -13,26 +13,23 @@ class Solution {
 public:
     bool isValidBST(TreeNode* root) {
         
-        long long low = LLONG_MIN;
-        long long high = LLONG_MAX;
-
-        return solve(root,low,high);
-
+        return solve(root,LLONG_MIN,LLONG_MAX);
+    
     }
 
-    bool solve(TreeNode* root,long long low,long long high){
+    bool solve(TreeNode* node,long long low,long long high){
 
-        if(root == nullptr){
+        if(node == nullptr){
             return true;
         };
-
-        if(root->val <= low || root->val >= high){
+        
+        long long val = node->val;
+        
+        if(val<= low || val >= high){
             return false;
         };
 
-        return solve(root->left,low,root->val) && solve(root->right,root->val,high);
-    
-
+        return solve(node->left,low,val)&&solve(node->right,val,high);
     };
 
 };
