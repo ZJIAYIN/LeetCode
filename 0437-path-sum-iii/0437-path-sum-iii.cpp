@@ -12,29 +12,25 @@
 class Solution {
 public:
     int pathSum(TreeNode* root, int targetSum) {
-       
-       if(root == nullptr){
+        
+        if(!root){
             return 0;
-       };
-
-       return pathSum(root->left,targetSum) + pathSum(root->right,targetSum) + count(root,targetSum);
+        };
+        return pathSum(root->left,targetSum) + pathSum(root->right,targetSum) + count(root,targetSum);
 
     }
 
-    int count(TreeNode* root, long long targetSum){
+    int count(TreeNode* node,long long sum){
 
-        if(root == nullptr){
+        int ans = 0;
+        if(!node){
             return 0;
         };
-
-        int tmp = 0;
-
-        if(root->val == targetSum){
-            tmp++;
+        if(node->val == sum){
+            ans++;
         };
 
-        return tmp + count(root->left,targetSum - root->val) + count(root->right,targetSum - root->val);
+        return ans + count(node->left,sum-node->val) + count(node->right,sum-node->val);
 
     };
-
 };
